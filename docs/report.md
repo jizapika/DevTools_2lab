@@ -82,3 +82,19 @@ git bisect good
 ```
 git bisect reset 
 ```
+## 6. В репозитории существует файл .env, содержащий конфиденциальную информацию. Удалите его из всех коммитов, где он присутствует, и добавьте в .gitignore.
+Через фильтр мы можем удалить все файлы типа .env 
+```
+git filter-branch --force --index-filter "git rm --cached --ignore-unmatch .env" --prune-empty --tag-name-filter cat -- --all 
+```
+![](6_1.bmp) \
+![](6_2.bmp) \
+Проверим, удалился он или нет
+```
+git ls-tree -r master --name-only | FINDSTR .env 
+```
+![](6_3.bmp) \
+Добавим в gitignore 
+```
+echo ".env" >> .gitignore 
+```
