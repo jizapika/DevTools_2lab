@@ -142,3 +142,8 @@ git merge feature --allow-unrelated-histories
 ```
 git add . && git commit 
 ```
+## 9. Проверьте целостность репозитория и убедитесь, что с ним всё в порядке. При наличии ошибок исправьте их.
+```
+git fsck --full 
+```
+![](9_1.bmp) 
