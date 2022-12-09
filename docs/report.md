@@ -98,3 +98,21 @@ git ls-tree -r master --name-only | FINDSTR .env
 ```
 echo ".env" >> .gitignore 
 ```
+## 7. Сделайте так, чтобы автором коммитов в ветке feature были Вы. Для этого укажите в изменяемых коммитах почту, привязанную к GitHub, и своё ФИО.
+Переключаемся в ветку feature 
+```
+git checkout feature 
+```
+Опять используем filter-branch, задав параметром все желаемые поля коммитов 
+```
+git filter-branch --force --env-filter "
+  GIT_AUTHOR_EMAIL=lyovoch@bk.ru;
+  GIT_AUTHOR_NAME=jizapika;
+  GIT_COMMITER_EMAIL=lyovoch@bk.ru;
+  GIT_COMMITER_NAME=jizapika;" 
+```
+Далее проверим, что у нас на самом деле произошло.
+```
+git log --oneline --graph --decorate --pretty=format:'%h%d %s [%an]' --all 
+```
+![](7_1.bmp)
