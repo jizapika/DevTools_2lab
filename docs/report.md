@@ -116,3 +116,29 @@ git filter-branch --force --env-filter "
 git log --oneline --graph --decorate --pretty=format:'%h%d %s [%an]' --all 
 ```
 ![](7_1.bmp)
+## 8. Включите запоминание разрешений конфликтов. Влейте ветку feature в master, разрешив конфликт при слиянии. Откатите слияние, внесите изменение в файл README.md и снова влейте ветку feature в master без ручного разрешения конфликта.
+```
+git checkout master 
+git config --global rerere.enabled true 
+```
+Замержим master и feature 
+```
+git merge feature --allow-unrelated-histories 
+```
+![](8_1.bmp) \
+Далее вручную решаем возникшие конфликты в 4 файлах и коммитим изменения. 
+```
+git add . 
+git commit
+``` 
+Мерж удался \
+![](8_2.bmp) \
+Отменим его 
+```
+git reset --hard HEAD~1 
+git merge feature --allow-unrelated-histories 
+```
+![](8_3.bmp) 
+```
+git add . && git commit 
+```
